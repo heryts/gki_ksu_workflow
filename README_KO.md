@@ -33,6 +33,9 @@
 
 커널 버전별 설정은 모두 [`.github/config/kernel_versions.json`](.github/config/kernel_versions.json) 파일에서 통합 관리됩니다. 워크플로우 실행 시 `kernel_version`만 지정하면 커널 버전, 서브 레벨, 컴파일러, Rust 사용 여부, AnyKernel3 브랜치 선택 등 빌드 매트릭스 전체가 자동으로 결정됩니다.
 
+> [!NOTE]
+> **커널 6.12.23 제거 안내:** 커밋 [`650419b`](https://github.com/midori01/gki_ksu_workflow/commit/650419be4e0f4d976aa5f57bbfc9982d8bf130ed)를 통해 [더 이상 사용되지 않는(deprecated)](https://android.googlesource.com/kernel/common/+/refs/heads/deprecated/android16-6.12-2025-06) `android16-6.12-2025-06` 버전이 기본 빌드 매트릭스에서 제거되었습니다. 해당 버전의 빌드가 필요한 경우 해당 커밋을 되돌리기(revert, `git revert 650419b`)하면 됩니다. 다른 커널 버전이 필요한 경우 [`.github/config/kernel_versions.json`](.github/config/kernel_versions.json) 파일을 직접 수정하여 구성할 수 있습니다.
+
 ---
 
 ## 📦 빌드 배리언트
@@ -74,16 +77,18 @@
 
 ## 📱 MidoriSU 매니저
 
-[**MidoriSU**](https://github.com/midori01/KernelSU)는 모든 MidoriSU 커널 변종을 지원하는 공식 동반 앱입니다. [**KowSU**](https://github.com/KOWX712/KernelSU)를 기반으로 커스텀 수정을 거쳐, **KX, NX, OX, RX, XX** 전 변종은 물론 모든 SUSFS 및 Droidspaces 조합과 완벽히 호환됩니다.
+[**MidoriSU**](https://github.com/midori01/KernelSU)는 모든 MidoriSU 커널 변종을 지원하는 공식 동반 앱입니다. [**KowSU**](https://github.com/KOWX712/KernelSU)를 기반으로 심도 있는 커스텀 및 기능 확장을 거쳐, **KX, NX, OX, RX, XX** 전 변종은 물론 모든 SUSFS 및 Droidspaces 조합과 완벽히 호환됩니다.
 
 | 기능 | 설명 |
 | :--- | :--- |
-| **홈 화면** | KSU 드라이버명, 후크 유형, SUSFS 버전, Droidspaces 버전, Re:Kernel/ReKernel-X 버전, 커널 빌드 시각을 한눈에 표시합니다. |
-| **커널 심볼** | `/proc/kallsyms`를 앱 내에서 탐색·검색·공유할 수 있습니다. |
-| **커널 로그** | dmesg 출력을 확인·검색·공유할 수 있어 신속한 디버깅이 가능합니다. |
-| **커널 구성** | 커널 빌드 옵션(`CONFIG_*`)을 조회·검색·공유할 수 있습니다. |
-| **Boot 이미지** | 앱 내에서 `boot.img`를 바로 백업하거나 플래시할 수 있습니다. |
-| **SELinux 전환** | Enforcing 모드와 Permissive 모드 간 즉시 전환이 가능합니다. |
+| **홈 화면 개요** | 현대적인 대시보드 상태 카드: KSU 드라이버 이름(네이티브 드라이버명 및 LKM 동적 감지), 후크 유형, SUSFS 버전, Droidspaces 버전, Re:Kernel(-X) 버전, 커널 빌드 시각 및 OEM 언락 상태를 한눈에 표시합니다. |
+| **듀얼 테마 및 외관 커스텀** | Material 3 Expressive 및 Miuix의 2가지 UI 스타일과 실시간 테마 미리보기를 완벽 지원하며, **MidoriSU**, **KowSU**, **공식 KernelSU** 간의 앱 이름, 아이콘 및 스플래시 화면 테마를 즉시 전환할 수 있습니다. |
+| **플래싱 및 파티션 도구** | 앱 내에서 `boot.img`의 직접 백업 및 플래싱을 지원하며, AnyKernel3 ZIP 패키지 플래싱 및 대상 슬롯 선택(Slot A/B)을 지원합니다. |
+| **화이트리스트 백업 및 복원** | Superuser 권한 허용 목록과 앱 프로필 정책의 완벽한 백업 및 복원을 지원합니다. |
+| **모듈 ZIP 내보내기** | 설치된 임의의 모듈을 플래시 가능한 표준 ZIP 아카이브로 직접 내보낼 수 있습니다. |
+| **커널 모듈 (LKM) 관리자** | 로드된 커널 모듈을 확인하고 동적 로드 및 언로드 작업을 지원합니다. |
+| **커널 진단 도구** | `/proc/kallsyms` 심볼 테이블, 실시간 dmesg 커널 로그, `CONFIG_*` 커널 빌드 구성의 앱 내 탐색·검색·공유를 지원합니다. |
+| **빠른 전환 및 기능 연동** | SELinux 모드(Enforcing / Permissive) 즉시 전환, SUSFS WebUI 바로가기 연동 및 KSU 드라이버 업데이트 확인 토글을 지원합니다. |
 
 ---
 

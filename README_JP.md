@@ -33,6 +33,9 @@
 
 カーネルバージョン固有の設定は、すべて [`.github/config/kernel_versions.json`](.github/config/kernel_versions.json) に集約されています。ワークフロー実行時に `kernel_version` を指定するだけで、カーネルバージョン、サブレベル、コンパイラ、Rust の要否、AnyKernel3 のブランチ選択など、ビルドマトリクス全体が自動的に決定されます。
 
+> [!NOTE]
+> **カーネル 6.12.23 削除について：** コミット [`650419b`](https://github.com/midori01/gki_ksu_workflow/commit/650419be4e0f4d976aa5f57bbfc9982d8bf130ed) により、[非推奨（deprecated）](https://android.googlesource.com/kernel/common/+/refs/heads/deprecated/android16-6.12-2025-06)となった `android16-6.12-2025-06` ブランチがデフォルトのビルドマトリクスから削除されました。このバージョンが引き続き必要な場合は、該当コミットを revert（`git revert 650419b`）してください。また、その他のカーネルバージョンが必要な場合は、[`.github/config/kernel_versions.json`](.github/config/kernel_versions.json) を直接編集してカスタマイズできます。
+
 ---
 
 ## 📦 ビルドバリアント
@@ -74,16 +77,18 @@
 
 ## 📱 MidoriSU マネージャー
 
-[**MidoriSU**](https://github.com/midori01/KernelSU) は、MidoriSU 全カーネルバリアント対応の公式コンパニオンアプリです。[**KowSU**](https://github.com/KOWX712/KernelSU) をベースに独自の改修を施しており、**KX、NX、OX、RX、XX** の全バリアント、および SUSFS / Droidspaces の全組み合わせにシームレスに対応します。
+[**MidoriSU**](https://github.com/midori01/KernelSU) は、MidoriSU 全カーネルバリアント対応の公式コンパニオンアプリです。[**KowSU**](https://github.com/KOWX712/KernelSU) をベースに大幅な独自拡張を施しており、**KX、NX、OX、RX、XX** の全バリアント、および SUSFS / Droidspaces の全組み合わせにシームレスに対応します。
 
 | 機能 | 説明 |
 | :--- | :--- |
-| **ホーム画面** | KSU ドライバ名、フックタイプ、SUSFS バージョン、Droidspaces バージョン、Re:Kernel/ReKernel-X バージョン、カーネルビルド時刻を一目で確認可能。 |
-| **カーネルシンボル** | `/proc/kallsyms` をアプリ内で閲覧・検索・共有。 |
-| **カーネルログ** | dmesg 出力の表示・検索・共有に対応し、迅速なデバッグが可能。 |
-| **カーネルコンフィグ** | カーネルビルドオプション（`CONFIG_*`）の確認・検索・共有が可能。 |
-| **Boot イメージ** | アプリから離れずに `boot.img` のバックアップ / フラッシュを実行可能。 |
-| **SELinux 切替** | Enforcing モード / Permissive モードをワンタップで即時切替。 |
+| **ホーム画面** | 刷新されたモダンなダッシュボード：KSU ドライバ名（ネイティブ名および LKM 動的検出）、フックタイプ、SUSFS バージョン、Droidspaces バージョン、Re:Kernel(-X) バージョン、カーネルビルド時刻、OEM ロック解除状態を一目で確認可能。 |
+| **デュアルテーマと外観カスタマイズ** | Material 3 Expressive と Miuix の両 UI スタイルおよびリアルタイムプレビューに完全対応。**MidoriSU**、**KowSU**、**公式 KernelSU** のアプリ名・アイコン・起動画面テーマをアプリ内から即時切り替え可能。 |
+| **フラッシュ・パーティションツール** | アプリ内で `boot.img` のバックアップと直接フラッシュが可能。さらに AnyKernel3 ZIP パッケージの直接フラッシュおよび対象スロット選択（Slot A/B）に対応。 |
+| **許可リストのバックアップと復元** | Superuser 許可リストとアプリプロファイル設定の完全なバックアップ・復元に対応。 |
+| **モジュールを ZIP としてエクスポート** | インストール済みモジュールを標準のフラッシュ可能な ZIP アーカイブとして直接書き出し可能。 |
+| **カーネルモジュール (LKM) 管理** | ロードされているカーネルモジュールの確認、動的ロードおよびアンロードをサポート。 |
+| **カーネル診断ツール** | `/proc/kallsyms` シンボルテーブル、リアルタイム dmesg ログ、`CONFIG_*` カーネルビルド設定の閲覧・検索・共有が可能。 |
+| **クイック切替と統合機能** | SELinux 動作モード（Enforcing / Permissive）の即時切替、SUSFS WebUI へのショートカット、KSU ドライバ更新確認トグルを搭載。 |
 
 ---
 

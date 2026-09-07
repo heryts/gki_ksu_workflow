@@ -33,6 +33,9 @@ This repository implements a unified, config-driven build orchestration system t
 
 All kernel version-specific settings are centralized in [`.github/config/kernel_versions.json`](.github/config/kernel_versions.json). A single `kernel_version` input at workflow dispatch drives the entire build matrix — including Kernel version, Sublevel, Compiler, Rust availability, and AnyKernel3 branch selection.
 
+> [!NOTE]
+> **Kernel 6.12.23 Deprecation:** Commit [`650419b`](https://github.com/midori01/gki_ksu_workflow/commit/650419be4e0f4d976aa5f57bbfc9982d8bf130ed) removed the [deprecated](https://android.googlesource.com/kernel/common/+/refs/heads/deprecated/android16-6.12-2025-06) `android16-6.12-2025-06` branch from the default build matrix. If you still need this version, simply revert that commit (`git revert 650419b`). If you require other kernel versions or revisions, feel free to edit [`.github/config/kernel_versions.json`](.github/config/kernel_versions.json) directly.
+
 ---
 
 ## 📦 Build Variants
@@ -74,16 +77,18 @@ All kernel version-specific settings are centralized in [`.github/config/kernel_
 
 ## 📱 MidoriSU Manager
 
-[**MidoriSU**](https://github.com/midori01/KernelSU) is the official companion app for all MidoriSU kernel variants. Built on [**KowSU**](https://github.com/KOWX712/KernelSU) with custom modifications, it offers seamless compatibility across the entire MidoriSU family — **KX, NX, OX, RX, XX** — including all SUSFS and Droidspaces combinations.
+[**MidoriSU**](https://github.com/midori01/KernelSU) is the official companion app for all MidoriSU kernel variants. Heavily customized and expanded based on [**KowSU**](https://github.com/KOWX712/KernelSU), it offers seamless out-of-the-box compatibility across the entire MidoriSU family — **KX, NX, OX, RX, XX** — including all SUSFS and Droidspaces combinations.
 
 | Feature | Description |
 | :--- | :--- |
-| **Homepage Overview** | Displays essential kernel info at a glance: KSU driver name, hook type, SUSFS version, Droidspaces version, Re:Kernel/ReKernel-X version, and kernel build timestamp. |
-| **Kernel Symbols** | Browse, search, and share `/proc/kallsyms` directly within the app. |
-| **Kernel Logs** | View, search, and share dmesg output for quick debugging. |
-| **Kernel Config** | Inspect, search, and share kernel build options (`CONFIG_*`). |
-| **Boot Image** | Backup and flash `boot.img` without leaving the app. |
-| **SELinux Toggle** | Instantly switch between Enforcing and Permissive SELinux modes. |
+| **Homepage Overview** | Modernized dashboard status card: dynamically displays KSU driver name (native driver name & dynamic LKM detection), hook type, SUSFS version, Droidspaces version, Re:Kernel(-X) version, kernel build timestamp, and OEM unlock status. |
+| **Dual Themes & Personalization** | Seamlessly supports both Material 3 Expressive and Miuix UI themes with live preview cards; includes a built-in switcher to toggle between **MidoriSU**, **KowSU**, and **Official KernelSU** app names, icons, and splash themes. |
+| **Flashing & Partition Tools** | Direct in-app backup and flashing of `boot.img`, as well as flashing AnyKernel3 zip packages with target slot selection (Slot A/B). |
+| **Allowlist Backup & Restore** | Complete backup and restoration for Superuser allowlist rules and per-app profile configurations. |
+| **Module Export as ZIP** | Export any installed module directly into a standard flashable ZIP archive. |
+| **Kernel Module (LKM) Manager** | Inspect loaded kernel modules with support for dynamic loading and unloading. |
+| **Kernel Diagnostics** | In-app inspection, searching, and sharing for `/proc/kallsyms` symbol table, live dmesg kernel logs, and `CONFIG_*` kernel compile options. |
+| **Toggles & Integrations** | Instant SELinux mode switching (Enforcing / Permissive), integrated SUSFS WebUI shortcut, and KSU driver update check toggle. |
 
 ---
 

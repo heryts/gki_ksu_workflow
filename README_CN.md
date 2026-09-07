@@ -33,6 +33,9 @@
 
 所有内核版本相关的设置都集中存放在 [`.github/config/kernel_versions.json`](.github/config/kernel_versions.json) 中。只需在工作流触发时提供 `kernel_version` 这一个输入参数，即可驱动整个构建矩阵——包括内核版本、子版本、编译器、Rust 可用性以及 AnyKernel3 分支选择。
 
+> [!NOTE]
+> **内核 6.12.23 移除说明：** 提交 [`650419b`](https://github.com/midori01/gki_ksu_workflow/commit/650419be4e0f4d976aa5f57bbfc9982d8bf130ed) 默认从构建矩阵中移除了已经[废弃](https://android.googlesource.com/kernel/common/+/refs/heads/deprecated/android16-6.12-2025-06)的 `android16-6.12-2025-06` 版本。如果仍有编译该版本需求，只需 revert 该提交（`git revert 650419b`）；如有其他内核版本需求，也可自行编辑 [`.github/config/kernel_versions.json`](.github/config/kernel_versions.json) 文件进行定制。
+
 ---
 
 ## 📦 构建变体
@@ -74,16 +77,18 @@
 
 ## 📱 MidoriSU 管理器
 
-[**MidoriSU**](https://github.com/midori01/KernelSU) 是面向所有 MidoriSU 内核变体的官方配套应用。基于 [**KowSU**](https://github.com/KOWX712/KernelSU) 并进行定制修改，无缝兼容整个 MidoriSU 系列 — **KX、NX、OX、RX、XX** — 包括所有 SUSFS 与 Droidspaces 组合。
+[**MidoriSU**](https://github.com/midori01/KernelSU) 是面向所有 MidoriSU 内核变体的官方配套应用。基于 [**KowSU**](https://github.com/KOWX712/KernelSU) 进行了深度定制与功能扩展，无缝兼容整个 MidoriSU 系列 — **KX、NX、OX、RX、XX** — 包括所有 SUSFS 与 Droidspaces 组合。
 
 | 功能 | 描述 |
 | :--- | :--- |
-| **首页概览** | 一目了然地显示关键内核信息：KSU 驱动名称、Hook 类型、SUSFS 版本、Droidspaces 版本、Re:Kernel/ReKernel-X 版本以及内核编译时间。 |
-| **内核符号** | 在应用内直接浏览、搜索和分享 `/proc/kallsyms`。 |
-| **内核日志** | 查看、搜索和分享 dmesg 输出，便于快速调试。 |
-| **内核配置** | 查看、搜索和分享内核编译选项（`CONFIG_*`）。 |
-| **Boot 镜像** | 无需离开应用即可备份和刷写 `boot.img`。 |
-| **SELinux 切换** | 在 Enforcing 与 Permissive 模式之间即时切换。 |
+| **首页概览** | 现代化仪表盘状态卡片：动态显示 KSU 驱动名称（原生驱动名与 LKM 动态识别）、Hook 类型、SUSFS 版本、Droidspaces 版本、Re:Kernel(-X) 版本、内核构建时间与 OEM 解锁状态。 |
+| **双主题与外观定制** | 深度支持 Material 3 Expressive 与 Miuix 两套 UI 风格及实时主题预览；内置切换器，可在 **MidoriSU**、**KowSU** 与 **官方 KernelSU** 之间即时切换应用名称、图标及开屏主题。 |
+| **镜像与内核刷写** | 支持在应用内直接备份与刷写 `boot.img` 分区，支持直接刷写 AnyKernel3 ZIP 刷机包并选择目标槽位（Slot A/B）。 |
+| **授权列表备份与恢复** | 支持 Superuser 授权列表与应用配置文件的完整备份与恢复，跨机迁移与重装无忧。 |
+| **模块导出为 ZIP** | 支持将已安装的任意活动/非活动模块一键打包并导出为标准可刷写的 ZIP 模块包。 |
+| **内核模块 (LKM) 管理** | 浏览已加载的内核模块，支持动态加载与卸载操作。 |
+| **内核诊断工具** | 应用内浏览、搜索与分享 `/proc/kallsyms` 内核符号、实时 dmesg 内核日志与 `CONFIG_*` 内核编译配置。 |
+| **快捷开关与功能集成** | 支持即时切换 SELinux 运行模式（Enforcing / Permissive）、内置 SUSFS WebUI 快捷跳转入口与驱动更新检查开关。 |
 
 ---
 
