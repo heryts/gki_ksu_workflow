@@ -64,16 +64,6 @@
     "default_sub_level": "92",
     "use_lts": true,
     "revisions": {
-      "23": {
-        "asb_date": "2025-06",
-        "default_r": "r58",
-        "supported_r": [
-          "r58",
-          "none"
-        ],
-        "commit": "37e196381e1c7823be8c0774d15cb34855b2ee04",
-        "commit_date": "2026-04-20 13:17:08 +0100"
-      },
       "38": {
         "asb_date": "2025-09",
         "default_r": "r38",
