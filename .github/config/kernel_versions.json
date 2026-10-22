@@ -86,13 +86,13 @@
       },
       "81": {
         "asb_date": "2026-06",
-        "default_r": "r34",
+        "default_r": "r35",
         "supported_r": [
-          "r34",
+          "r35",
           "none"
         ],
-        "commit": "d6d35727afd6db5d1acfbaa3465824204c894fb5",
-        "commit_date": "2026-10-19 08:02:57 -0700"
+        "commit": "280e7c6dcd8c1b0e6cdcbc5e0bb7d4e5b3836d7e",
+        "commit_date": "2026-10-21 01:37:56 -0700"
       },
       "96": {
         "asb_date": "lts",
